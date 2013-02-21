@@ -165,7 +165,10 @@
         }
         
     }
-    
+
+    [_objects sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[obj1 objectForKey:@"name"] compare:[obj2 objectForKey:@"name"] options:NSCaseInsensitiveSearch];
+    }];
 
     [self.tableView reloadData];
 
@@ -177,7 +180,7 @@
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+
 }
 */
 
