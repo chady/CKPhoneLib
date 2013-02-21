@@ -20,6 +20,7 @@
 		E2B61CDB16D53A7700B5B358 /* CKMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B61CDA16D53A7700B5B358 /* CKMasterViewController.m */; };
 		E2B61CDE16D53A7700B5B358 /* CKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B61CDD16D53A7700B5B358 /* CKDetailViewController.m */; };
 		E2B61CE516D53B8E00B5B358 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B61CE416D53B8E00B5B358 /* AddressBook.framework */; };
+		E2BB311016D60A3600F8A914 /* CKPhoneLib.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BB310F16D60A3600F8A914 /* CKPhoneLib.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		E2B61CDC16D53A7700B5B358 /* CKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDetailViewController.h; sourceTree = "<group>"; };
 		E2B61CDD16D53A7700B5B358 /* CKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDetailViewController.m; sourceTree = "<group>"; };
 		E2B61CE416D53B8E00B5B358 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		E2BB310E16D60A3600F8A914 /* CKPhoneLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKPhoneLib.h; path = ../../../Class/CKPhoneLib.h; sourceTree = "<group>"; };
+		E2BB310F16D60A3600F8A914 /* CKPhoneLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKPhoneLib.m; path = ../../../Class/CKPhoneLib.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 		E2B61CC416D53A7600B5B358 /* CKPhoneLibTest */ = {
 			isa = PBXGroup;
 			children = (
+				E2BB310E16D60A3600F8A914 /* CKPhoneLib.h */,
+				E2BB310F16D60A3600F8A914 /* CKPhoneLib.m */,
 				E2B61CCD16D53A7700B5B358 /* CKAppDelegate.h */,
 				E2B61CCE16D53A7700B5B358 /* CKAppDelegate.m */,
 				E2B61CD616D53A7700B5B358 /* MainStoryboard.storyboard */,
@@ -187,6 +192,7 @@
 				E2B61CCF16D53A7700B5B358 /* CKAppDelegate.m in Sources */,
 				E2B61CDB16D53A7700B5B358 /* CKMasterViewController.m in Sources */,
 				E2B61CDE16D53A7700B5B358 /* CKDetailViewController.m in Sources */,
+				E2BB311016D60A3600F8A914 /* CKPhoneLib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
