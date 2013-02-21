@@ -7,7 +7,7 @@
 //
 
 #import "CKMasterViewController.h"
-
+#import <AddressBook/AddressBook.h>
 #import "CKDetailViewController.h"
 
 @interface CKMasterViewController () {
@@ -26,10 +26,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    _objects = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +38,7 @@
 - (void)insertNewObject:(id)sender
 {
     if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+        
     }
     [_objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -64,8 +61,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSDictionary *object = _objects[indexPath.row];
+    cell.textLabel.text = [object objectForKey:@"name"];
     return cell;
 }
 
@@ -84,6 +81,96 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
+
+
+
+-(IBAction)loadContacts:(id)sender {
+    NSLog(@"Syncing");
+    CFErrorRef err;
+    
+    
+    
+    
+    ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, &err);
+    
+    ABAddressBookRequestAccessWithCompletion(m_addressbook, ^(bool granted, CFErrorRef error) {
+        if (granted) {
+            [self performSelectorInBackground:@selector(readContacts) withObject:nil];
+        } else {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"I need permission to access your contacts before I can continue" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
+    });
+    
+}
+
+-(void)readContacts {
+    [_objects removeAllObjects];
+    
+    CFErrorRef err;
+    
+    ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, &err);
+    if (!m_addressbook)
+    {
+        NSLog(@"opening address book");
+    }
+    
+	CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(m_addressbook);
+	CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
+    NSLog(@"Scanning %li contacts", nPeople);
+    
+    for (int i = 0; i < nPeople; i++) {
+        ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
+        
+        
+        NSString * firstName = (__bridge NSString *) ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+        NSString * lastName  = (__bridge NSString *) ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        
+        NSString * name = firstName;
+        if (lastName != nil && [lastName length] > 0) {
+            if (name == nil) {
+                name = lastName;
+            } else {
+                name = [name stringByAppendingFormat:@" %@", lastName];
+            }
+        }
+        
+        if (name == nil) {
+            name = @"n/a";
+        }
+        
+        
+        ABMultiValueRef phones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
+		int count =  ABMultiValueGetCount(phones);
+        if (count > 0) {
+            
+            NSMutableArray * numbers = [NSMutableArray arrayWithCapacity:count];
+            
+            
+            for(CFIndex j = 0; j < count; j++)
+            {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(phones, j);
+                
+                [numbers addObject:(__bridge NSString *)phoneNumberRef];
+                
+                
+            }
+            
+            NSDictionary * contact = @{@"name" : name, @"numbers": numbers};
+            [_objects addObject:contact];
+        } else {
+            NSLog(@"Contact has no phones, skipping");
+        }
+        
+    }
+    
+
+    [self.tableView reloadData];
+
+    
+}
+
+
 
 /*
 // Override to support rearranging the table view.
@@ -105,7 +192,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
+        NSDictionary *object = _objects[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
 }

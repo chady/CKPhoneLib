@@ -19,6 +19,7 @@
 		E2B61CD816D53A7700B5B358 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B61CD616D53A7700B5B358 /* MainStoryboard.storyboard */; };
 		E2B61CDB16D53A7700B5B358 /* CKMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B61CDA16D53A7700B5B358 /* CKMasterViewController.m */; };
 		E2B61CDE16D53A7700B5B358 /* CKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B61CDD16D53A7700B5B358 /* CKDetailViewController.m */; };
+		E2B61CE516D53B8E00B5B358 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B61CE416D53B8E00B5B358 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		E2B61CDA16D53A7700B5B358 /* CKMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKMasterViewController.m; sourceTree = "<group>"; };
 		E2B61CDC16D53A7700B5B358 /* CKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKDetailViewController.h; sourceTree = "<group>"; };
 		E2B61CDD16D53A7700B5B358 /* CKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKDetailViewController.m; sourceTree = "<group>"; };
+		E2B61CE416D53B8E00B5B358 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B61CE516D53B8E00B5B358 /* AddressBook.framework in Frameworks */,
 				E2B61CBF16D53A7600B5B358 /* UIKit.framework in Frameworks */,
 				E2B61CC116D53A7600B5B358 /* Foundation.framework in Frameworks */,
 				E2B61CC316D53A7600B5B358 /* CoreGraphics.framework in Frameworks */,
@@ -59,6 +62,7 @@
 		E2B61CB216D53A7600B5B358 = {
 			isa = PBXGroup;
 			children = (
+				E2B61CE416D53B8E00B5B358 /* AddressBook.framework */,
 				E2B61CC416D53A7600B5B358 /* CKPhoneLibTest */,
 				E2B61CBD16D53A7600B5B358 /* Frameworks */,
 				E2B61CBC16D53A7600B5B358 /* Products */,
@@ -305,6 +309,7 @@
 				E2B61CE316D53A7700B5B358 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

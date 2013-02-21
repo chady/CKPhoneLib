@@ -10,4 +10,6 @@
 
 @interface CKMasterViewController : UITableViewController
 
+
+-(IBAction)loadContacts:(id)sender;
 @end
