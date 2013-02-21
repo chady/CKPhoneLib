@@ -31,7 +31,19 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+       
+        self.nameLabel.text = [self.detailItem objectForKey:@"name"];
+        
+        NSString * phones = @"";
+        NSArray * numbers = [self.detailItem objectForKey:@"numbers"];
+        for (NSString * phone in numbers) {
+            
+            phones = [phones stringByAppendingFormat:@"\n%@ -> (%@) (%@)", phone, @"blah", @"foo"];
+            
+        }
+        
+        self.phonesView.text = phones;
+        
     }
 }
 
