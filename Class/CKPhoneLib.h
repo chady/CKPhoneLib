@@ -14,7 +14,7 @@
 
 +(CKPhoneLib *)sharedClient;
 
--(NSDictionary *)parseNumber:(NSString *)number;
+-(NSDictionary *)extractPhoneComponents:(NSString *)number;
 
 @end
 

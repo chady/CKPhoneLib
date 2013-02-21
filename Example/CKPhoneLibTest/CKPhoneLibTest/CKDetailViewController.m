@@ -7,6 +7,7 @@
 //
 
 #import "CKDetailViewController.h"
+#import "CKPhoneLib.h"
 
 @interface CKDetailViewController ()
 - (void)configureView;
@@ -34,11 +35,16 @@
        
         self.nameLabel.text = [self.detailItem objectForKey:@"name"];
         
+        CKPhoneLib * phoneLib = [CKPhoneLib sharedClient];
+        phoneLib.fallbackCountryCode = @"+961";
+        
         NSString * phones = @"";
         NSArray * numbers = [self.detailItem objectForKey:@"numbers"];
         for (NSString * phone in numbers) {
             
-            phones = [phones stringByAppendingFormat:@"\n%@ -> (%@) (%@)", phone, @"blah", @"foo"];
+            NSDictionary * num = [phoneLib extractPhoneComponents:phone];
+            
+            phones = [phones stringByAppendingFormat:@"\n\n%@\n - Country Code: %@\n - Phone Number:%@", phone, [num objectForKey:@"countryCode" ], [num objectForKey:@"phoneNumber" ]];
             
         }
         
