@@ -115,9 +115,10 @@
             NSInteger pos = [self _countryCodePosition:normalized];
             countryCode = [normalized substringToIndex:pos];
             phoneNumber = [normalized substringFromIndex:pos];
-            while ([phoneNumber length] > 0 && [phoneNumber characterAtIndex:0] == '0') {
-                phoneNumber = [phoneNumber substringFromIndex:1];
-            }
+            
+        }
+        while ([phoneNumber length] > 0 && [phoneNumber characterAtIndex:0] == '0') {
+            phoneNumber = [phoneNumber substringFromIndex:1];
         }
     
     }
